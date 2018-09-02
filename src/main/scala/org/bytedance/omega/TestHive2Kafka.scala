@@ -35,7 +35,7 @@ object TestHive2Kafka {
       df.show()
 
 
-     df.foreachPartition(
+     df.rdd.foreachPartition(
        partition =>{
          partition.foreach(record=>{
            kafkaProducer.value.send(topic, 0,"", record.toString())
