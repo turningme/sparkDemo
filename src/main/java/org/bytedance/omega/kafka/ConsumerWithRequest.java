@@ -7,9 +7,12 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Properties;
 
-public class ConsumerWithTmd {
+public class ConsumerWithRequest {
     private static Conf conf =
             new Conf("/Users/lijinpeng/app/kafka/ss_conf/kafka.conf");//remote
 
@@ -30,7 +33,7 @@ public class ConsumerWithTmd {
      * @param consumerId
      */
 
-    public ConsumerWithTmd(int consumerId) {
+    public ConsumerWithRequest(int consumerId) {
         props = new Properties();
         kafkaZk = conf.getString("kafka_test");
         id = consumerId;
@@ -102,7 +105,7 @@ public class ConsumerWithTmd {
 
 
 
-    public static final String TOPIC = "omega_feature_test";
+    public static final String TOPIC = "omega_log_monitor_request_t0";
     public static  List<TopicPartition> mockTopics(){
         List<TopicPartition> topParts = new ArrayList();
         for(int i=0; i<10 ;i++){
@@ -118,14 +121,14 @@ public class ConsumerWithTmd {
 
         List<TopicPartition> topParts = mockTopics();
 
-        ConsumerWithTmd csm0 = new ConsumerWithTmd(1);
+        ConsumerWithRequest csm0 = new ConsumerWithRequest(1);
         csm0.SubscribeTopicPartition(topParts);
         csm0.DealMessage();
     }
 
 
     public static void test2(){
-        ConsumerWithTmd csm0 = new ConsumerWithTmd(1);
+        ConsumerWithRequest csm0 = new ConsumerWithRequest(1);
         System.out.println(csm0.consumer.subscription().size());
     }
 
